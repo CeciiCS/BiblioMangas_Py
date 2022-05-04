@@ -23,11 +23,12 @@ def personaje(request):
 def mangaFormulario(request):
     if request.method == "POST":
         mangaForm = MangaFormulario(request.POST)
-        if mangaForm.is_valid():
+        print(mangaForm)
+        if mangaForm.is_valid:
             informacion = mangaForm.cleaned_data
-            manga = Manga(nombre=informacion['nombre'], genero=informacion['genero'], anio_lanzamiento=informacion['anio_lanzamiento'], tomo=informacion['tomo'])
+            manga = Manga (nombre=informacion['nombre'], genero=informacion['genero'], anio_lanzamiento=informacion['anio_lanzamiento'], tomo=informacion['tomo'])
             manga.save()
             return render(request, "App_Mangas/inicio.html")
     else:
         mangaForm = MangaFormulario()
-    return render(request, "App_Mangas/manga.html", {"mangaForm": mangaForm})
+    return render(request, "App_Mangas/mangaFormulario.html", {"mangaForm": mangaForm})
